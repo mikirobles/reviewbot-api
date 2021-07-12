@@ -33,10 +33,10 @@ describe("FacebookMessageService - Unit tests", () => {
         message_id: expectedResponse.messageId,
       });
 
-    const response = await service.sendMessage(
-      expectedResponse.targetId,
-      "Fake message"
-    );
+    const response = await service.sendMessage({
+      id: expectedResponse.targetId,
+      message: "Fake message",
+    });
 
     expect(response).toEqual(expectedResponse);
   });

@@ -1,23 +1,25 @@
 import express from "express";
 import ActionProvider from "./ActionProvider";
 import ServiceProvider from "./ServiceProvider";
+
 const app = express();
 const port = 8080;
+app.use(express.json());
+const actionProvider = new ActionProvider();
+const serviceProvider = new ServiceProvider();
 
 app.post("/askReview", async (req, res) => {
-  const actionProvider = new ActionProvider();
-  const serviceProvider = new ServiceProvider();
-
   const { targetId } = req.body;
+  // TODO: Validate params
+  // TODO: Error handling
 
-  const sendMessageAction = actionProvider.getSendMessage(
-    serviceProvider.getMessageService()
+  const askForReviewAction = actionProvider.getAskForReview(
+    serviceProvider.getMessageService(),
+    serviceProvider.getReviewService()
   );
-  const template = `Hi, please let us know what you think of the product you received from us!`;
 
-  const message = await sendMessageAction.execute({
+  const message = await askForReviewAction.execute({
     targetId,
-    message: template,
   });
 
   res.send(message);

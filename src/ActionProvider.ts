@@ -1,9 +1,13 @@
-import SendMessage from "./packages/chat/actions/SendMessage";
 import MessageService from "./packages/chat/domain/MessageService";
+import AskForReview from "./packages/reviews/actions/AskForReview";
+import ReviewService from "./packages/reviews/domain/ReviewService";
 
 class ActionProvider {
-  getSendMessage(messageService: MessageService): SendMessage {
-    return new SendMessage(messageService);
+  getAskForReview(
+    messageService: MessageService,
+    reviewService: ReviewService
+  ): AskForReview {
+    return new AskForReview(messageService, reviewService);
   }
 }
 

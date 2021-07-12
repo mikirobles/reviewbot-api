@@ -1,7 +1,8 @@
 import { Message } from "./entities/Message";
+import { SendMessageParams } from "./entities/SendMessageParams";
 
 interface MessageService {
-  sendMessage(id: string, message: string): Promise<Message>;
+  sendMessage(params: SendMessageParams): Promise<Message>;
 }
 
 export default MessageService;

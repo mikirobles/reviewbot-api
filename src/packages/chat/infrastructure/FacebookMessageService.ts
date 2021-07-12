@@ -1,5 +1,6 @@
 import HTTPService from "../../http/domain/HTTPService";
 import { Message } from "../domain/entities/Message";
+import { SendMessageParams } from "../domain/entities/SendMessageParams";
 import MessageService from "../domain/MessageService";
 import { MessagingType } from "./entities/MessagingType";
 import { SendFacebookMessagePayload } from "./entities/SendFacebookMessagePayload";
@@ -8,7 +9,9 @@ import { SendFacebookMessageResponse } from "./entities/SendFacebookMessageRespo
 class FacebookMessageService implements MessageService {
   constructor(private httpService: HTTPService) {}
 
-  async sendMessage(id: string, message: string): Promise<Message> {
+  async sendMessage(params: SendMessageParams): Promise<Message> {
+    const { id, message } = params;
+
     const response = await this.httpService.post<
       SendFacebookMessagePayload,
       SendFacebookMessageResponse
@@ -24,6 +27,7 @@ class FacebookMessageService implements MessageService {
         },
       }
     );
+
     return {
       targetId: response.recipient_id,
       messageId: response.message_id,
