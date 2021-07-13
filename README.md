@@ -16,3 +16,4 @@ You can read more about IDD here: https://levelup.gitconnected.com/better-ios-ap
 - [ ] E2E / Integration tests
 - [ ] Proper error handling
 - [ ] Proper request body validation
+- [ ] Dockerize package
